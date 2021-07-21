@@ -1,5 +1,11 @@
 # @usedapp/core
 
+## 0.4.2
+
+### Patch Changes
+
+- 59592f3: Add Harmony support
+
 ## 0.4.1
 
 ### Patch Changes
