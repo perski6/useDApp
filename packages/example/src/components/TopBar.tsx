@@ -40,6 +40,14 @@ export function TopBar() {
               {' '}
               Transactions{' '}
             </HeaderLink>
+            <HeaderLink activeClassName="active-page" to="/read">
+              {' '}
+              Read Contract{' '}
+            </HeaderLink>
+            <HeaderLink activeClassName="active-page" to="/write">
+              {' '}
+              Write Contract{' '}
+            </HeaderLink>
           </HeaderNavLinks>
         </HeaderNav>
       </HeaderContainer>

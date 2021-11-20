@@ -10,7 +10,9 @@ import { Block } from './pages/Block'
 import { Tokens } from './pages/Tokens'
 import { Transactions } from './pages/Transactions'
 import { SendEtherPage } from './pages/SendEtherPage'
+import { ContractReadFunctions } from './pages/ContractReadFunctions'
 import { NotificationsList } from './components/Transactions/History'
+import { ContractWriteFunctions } from './pages/ContractWriteFunctions'
 
 export function App() {
   return (
@@ -25,6 +27,8 @@ export function App() {
           <Route exact path="/tokens" component={Tokens} />
           <Route exact path="/send" component={SendEtherPage} />
           <Route exact path="/transactions" component={Transactions} />
+          <Route exact path="/read" component={ContractReadFunctions} />
+          <Route exact path="/write" component={ContractWriteFunctions} />
           <Redirect exact from="/" to="/balance" />
         </Switch>
       </BrowserRouter>

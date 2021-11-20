@@ -18,11 +18,12 @@ const axios_1 = __importDefault(require("axios"));
 const fs_1 = __importDefault(require("fs"));
 const web3 = new web3_1.default(new web3_1.default.providers.HttpProvider('localhost'));
 commander_1.program.version('0.0.1');
-function leaveOnlyFunctions(jsonObject) {
+function leaveOnlyFunctions(jsonObject, contractAddress) {
     const resultWrite = [];
     const resultRead = [];
     for (const obj of jsonObject) {
         if (obj.type === 'function') {
+            obj.constractAddress = contractAddress;
             if (obj.stateMutability === 'view') {
                 resultWrite.push(obj);
             }
@@ -41,9 +42,8 @@ function createInterface(contractAddress) {
         const response = yield axios_1.default.get(`https://api.etherscan.io/api?module=contract&action=getabi&address=${contractAddress}`);
         const data = response.data;
         const contractABI = JSON.parse(data.result);
-        ;
         if (contractABI) {
-            const filteredContractAbi = leaveOnlyFunctions(contractABI);
+            const filteredContractAbi = leaveOnlyFunctions(contractABI, contractAddress);
             fs_1.default.writeFile(`../example/src/scaffold/contractREAD.json`, JSON.stringify(filteredContractAbi.resultRead), 'utf8', (err) => {
                 if (err)
                     throw err;
