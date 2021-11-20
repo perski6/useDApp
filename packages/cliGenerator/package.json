@@ -1,0 +1,28 @@
+{
+  "name": "cli-contract-app",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:perski6/Hackathon4-CLI-usedapp.git",
+  "author": "mateusz <mistrzumati@spoko.pl>",
+  "license": "MIT",
+  "dependencies": {
+    "@types/jquery": "^3.5.8",
+    "@types/node": "^16.11.9",
+    "axios": "^0.24.0",
+    "commander": "^8.3.0",
+    "fs": "^0.0.1-security",
+    "gitignore": "^0.7.0",
+    "save-dev": "^0.0.1-security",
+    "typescript": "^4.5.2",
+    "web3": "^1.6.1"
+  },
+  "scripts": {
+    "build": "tsc",
+    "start": "node ./bin/app.js",
+    "dev": "ts-node ./src/app.ts",
+    "generate": "node ./bin/app.js createInterface"
+  },
+  "devDependencies": {
+    "ts-node": "^10.4.0"
+  }
+}
