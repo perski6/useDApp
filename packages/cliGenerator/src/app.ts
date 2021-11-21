@@ -25,6 +25,13 @@ type SingleContractObject = {
     stateMutability?: string
 }
 
+type Response = {
+    address: string,
+    read: SingleContractObject[],
+    write: SingleContractObject[],
+    abi: any,
+}
+
 program.version('0.0.1')
 
 function leaveOnlyFunctions(jsonObject: SingleContractObject[], contractAddress: string) {
@@ -55,15 +62,16 @@ async function createInterface(contractAddress: string) {
     const contractABI = JSON.parse(data.result)
     if (contractABI) {
         const filteredContractAbi = leaveOnlyFunctions(contractABI, contractAddress)
-     
-        fs.writeFile(`../example/src/scaffold/contractREAD.json`, JSON.stringify(filteredContractAbi.resultRead), 'utf8', (err) => {
+        const response: Response = {
+            address: contractAddress,
+            read: filteredContractAbi.resultRead,
+            write: filteredContractAbi.resultWrite,
+            abi: contractABI,
+        }
+
+        fs.writeFile(`../example/src/scaffold/contractScaffold.json`, JSON.stringify(response), 'utf8', (err) => {
             if (err) throw err;
             console.log(`Fdupa`)
-        })
-       
-        fs.writeFile(`../example/src/scaffold/contractWRITE.json`, JSON.stringify(filteredContractAbi.resultWrite), 'utf8', (err) => {
-            if (err) throw err;
-            console.log(`diupan`)
         })
     } else {
         console.log('Error')
