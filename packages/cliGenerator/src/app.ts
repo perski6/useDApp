@@ -26,7 +26,10 @@ type SingleContractObject = {
 }
 
 type Response = {
+<<<<<<< HEAD
     address: string,
+=======
+>>>>>>> 5e1c40d5aece487f000df1478aafc3c4cdd3463e
     read: SingleContractObject[],
     write: SingleContractObject[],
     abi: any,
@@ -63,7 +66,10 @@ async function createInterface(contractAddress: string) {
     if (contractABI) {
         const filteredContractAbi = leaveOnlyFunctions(contractABI, contractAddress)
         const response: Response = {
+<<<<<<< HEAD
             address: contractAddress,
+=======
+>>>>>>> 5e1c40d5aece487f000df1478aafc3c4cdd3463e
             read: filteredContractAbi.resultRead,
             write: filteredContractAbi.resultWrite,
             abi: contractABI,
