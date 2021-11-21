@@ -43,6 +43,7 @@ export const WriteClick = ({ name, inputs, constractAddress }: SingleContractObj
   const [click, useClick] = useState(false)
 
   const show = () => {
+    sendTransaction()
     useClick(true)
   }
 
