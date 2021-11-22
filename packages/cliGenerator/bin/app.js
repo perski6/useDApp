@@ -44,15 +44,16 @@ function createInterface(contractAddress) {
         const contractABI = JSON.parse(data.result);
         if (contractABI) {
             const filteredContractAbi = leaveOnlyFunctions(contractABI, contractAddress);
-            fs_1.default.writeFile(`../example/src/scaffold/contractREAD.json`, JSON.stringify(filteredContractAbi.resultRead), 'utf8', (err) => {
+            const response = {
+                address: contractAddress,
+                read: filteredContractAbi.resultRead,
+                write: filteredContractAbi.resultWrite,
+                abi: contractABI,
+            };
+            fs_1.default.writeFile(`../example/src/scaffold/contractScaffold.json`, JSON.stringify(response), 'utf8', (err) => {
                 if (err)
                     throw err;
                 console.log(`Fdupa`);
-            });
-            fs_1.default.writeFile(`../example/src/scaffold/contractWRITE.json`, JSON.stringify(filteredContractAbi.resultWrite), 'utf8', (err) => {
-                if (err)
-                    throw err;
-                console.log(`diupan`);
             });
         }
         else {

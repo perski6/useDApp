@@ -1,14 +1,15 @@
 import React from 'react'
 import styled from 'styled-components'
 import { WriteClick } from './WriteClick'
+import Data from '../../scaffold/contractScaffold.json'
+const fileContent = Data.write
 
-const fileContent =
-  '[{"constant":false,"inputs":[{"name":"_upgradedAddress","type":"address"}],"name":"deprecate","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function","constractAddress":"0xdac17f958d2ee523a2206206994597c13d831ec7"},{"constant":false,"inputs":[{"name":"_spender","type":"address"},{"name":"_value","type":"uint256"}],"name":"approve","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function","constractAddress":"0xdac17f958d2ee523a2206206994597c13d831ec7"},{"constant":false,"inputs":[{"name":"_evilUser","type":"address"}],"name":"addBlackList","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function","constractAddress":"0xdac17f958d2ee523a2206206994597c13d831ec7"},{"constant":false,"inputs":[{"name":"_from","type":"address"},{"name":"_to","type":"address"},{"name":"_value","type":"uint256"}],"name":"transferFrom","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function","constractAddress":"0xdac17f958d2ee523a2206206994597c13d831ec7"},{"constant":false,"inputs":[],"name":"unpause","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function","constractAddress":"0xdac17f958d2ee523a2206206994597c13d831ec7"},{"constant":false,"inputs":[],"name":"pause","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function","constractAddress":"0xdac17f958d2ee523a2206206994597c13d831ec7"},{"constant":false,"inputs":[{"name":"_to","type":"address"},{"name":"_value","type":"uint256"}],"name":"transfer","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function","constractAddress":"0xdac17f958d2ee523a2206206994597c13d831ec7"},{"constant":false,"inputs":[{"name":"newBasisPoints","type":"uint256"},{"name":"newMaxFee","type":"uint256"}],"name":"setParams","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function","constractAddress":"0xdac17f958d2ee523a2206206994597c13d831ec7"},{"constant":false,"inputs":[{"name":"amount","type":"uint256"}],"name":"issue","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function","constractAddress":"0xdac17f958d2ee523a2206206994597c13d831ec7"},{"constant":false,"inputs":[{"name":"amount","type":"uint256"}],"name":"redeem","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function","constractAddress":"0xdac17f958d2ee523a2206206994597c13d831ec7"},{"constant":false,"inputs":[{"name":"_clearedUser","type":"address"}],"name":"removeBlackList","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function","constractAddress":"0xdac17f958d2ee523a2206206994597c13d831ec7"},{"constant":false,"inputs":[{"name":"newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function","constractAddress":"0xdac17f958d2ee523a2206206994597c13d831ec7"},{"constant":false,"inputs":[{"name":"_blackListedUser","type":"address"}],"name":"destroyBlackFunds","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function","constractAddress":"0xdac17f958d2ee523a2206206994597c13d831ec7"}]'
 
 type Input = {
   name: string
   type: string
 }
+
 
 type SingleContractObject = {
   constant: boolean
@@ -21,7 +22,7 @@ type SingleContractObject = {
 }
 
 const readJsonWriteFile = () => {
-  return JSON.parse(fileContent) as SingleContractObject[]
+  return fileContent as SingleContractObject[]
 }
 
 export const WriteFunctions = () => {
