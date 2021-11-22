@@ -41,10 +41,10 @@ function leaveOnlyFunctions(jsonObject: SingleContractObject[], contractAddress:
         if (obj.type === 'function') {
             obj.constractAddress = contractAddress
             if (obj.stateMutability === 'view') {
-                resultWrite.push(obj)
+                resultRead.push(obj)
             }
             else {
-                resultRead.push(obj)
+                resultWrite.push(obj)
             }
         }
     }
@@ -60,12 +60,13 @@ async function createInterface(contractAddress: string) {
     const data: ContractRequest = response.data
 
     const contractABI = JSON.parse(data.result)
+    const MyContract = new web3.eth.Contract(contractABI)
     if (contractABI) {
         const filteredContractAbi = leaveOnlyFunctions(contractABI, contractAddress)
         const response: Response = {
             address: contractAddress,
-            read: filteredContractAbi.resultRead,
             write: filteredContractAbi.resultWrite,
+            read: filteredContractAbi.resultRead,
             abi: contractABI,
         }
 

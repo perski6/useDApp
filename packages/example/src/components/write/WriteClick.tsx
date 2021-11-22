@@ -3,25 +3,9 @@ import { Contract } from '@ethersproject/contracts'
 import { useContractFunction } from '@usedapp/core'
 import React, { useState } from 'react'
 import styled from 'styled-components'
+import Data from '../../scaffold/contractScaffold.json'
 
-export const ERC20_ABI = [
-  'constructor(uint256 _totalSupply)',
-  'event Approval(address indexed owner, address indexed spender, uint256 value)',
-  'event Transfer(address indexed from, address indexed to, uint256 value)',
-  'function DOMAIN_SEPARATOR() view returns(bytes32)',
-  'function PERMIT_TYPEHASH() view returns(bytes32)',
-  'function allowance(address, address) view returns(uint256)',
-  'function approve(address spender, uint256 value) returns(bool)',
-  'function balanceOf(address) view returns(uint256)',
-  'function decimals() view returns(uint8)',
-  'function name() view returns(string)',
-  'function nonces(address) view returns(uint256)',
-  'function permit(address owner, address spender, uint256 value, uint256 deadline, uint8 v, bytes32 r, bytes32 s)',
-  'function symbol() view returns(string)',
-  'function totalSupply() view returns(uint256)',
-  'function transfer(address to, uint256 value) returns(bool)',
-  'function transferFrom(address from, address to, uint256 value) returns(bool)',
-]
+const fileContent = Data.write
 
 type Input = {
   name: string
@@ -43,11 +27,10 @@ export const WriteClick = ({ name, inputs, constractAddress }: SingleContractObj
 
   const show = () => {
     send(...args)
-    console.log(state, args, contract)
     useClick(true)
   }
 
-  const contract = new Contract(constractAddress, new Interface(ERC20_ABI))
+  const contract = new Contract(constractAddress, new Interface(fileContent))
 
   const { state, send } = useContractFunction(contract, name, { transactionName: name })
 
@@ -92,27 +75,34 @@ export const WriteClick = ({ name, inputs, constractAddress }: SingleContractObj
     <WriteItem>
       <WriteName>{name}</WriteName>
       <WriteBalance>
-        {inputs.length === 1 ? (
-        <input onChange={(e) => changeFirstArg(e.target.value)} />
-      ) : inputs.length === 2 ? (
-        <div>
-          <input onChange={(e) => changeFirstArg(e.target.value)} />
-          <input onChange={(e) => changeSecondArg(e.target.value)} />
-        </div>
-      ) : inputs.length === 3 ? (
-        <div>
-          <input onChange={(e) => changeFirstArg(e.target.value)} />
-          <input onChange={(e) => changeSecondArg(e.target.value)} />
-          <input onChange={(e) => changeThirdArg(e.target.value)} />
-        </div>
-      ) : (
-        <></>
-      )}
-
-      {click ? <div><p>{state.status.toString()}</p></div> : <></>}
+        {click ? (
+          <div>
+            <p>{state.status.toString()}</p>
+          </div>
+        ) : (
+          <></>
+        )}
       </WriteBalance>
       <WriteTicker>
-        <button onClick={() => show() }>Terminate</button>
+        <Row>
+          <Button onClick={() => show()}>Terminate</Button>
+          {inputs.length === 1 ? (
+            <Input onChange={(e) => changeFirstArg(e.target.value)} />
+          ) : inputs.length === 2 ? (
+            <div>
+              <Input onChange={(e) => changeFirstArg(e.target.value)} />
+              <Input onChange={(e) => changeSecondArg(e.target.value)} />
+            </div>
+          ) : inputs.length === 3 ? (
+            <div>
+              <Input onChange={(e) => changeFirstArg(e.target.value)} />
+              <Input onChange={(e) => changeSecondArg(e.target.value)} />
+              <Input onChange={(e) => changeThirdArg(e.target.value)} />
+            </div>
+          ) : (
+            <></>
+          )}
+        </Row>
       </WriteTicker>
     </WriteItem>
   )
@@ -179,4 +169,46 @@ const WriteBalance = styled(TextBold)`
   grid-area: balance;
   font-size: 20px;
   line-height: 32px;
+`
+
+const Button = styled.button`
+  position: realative;
+  line-height: 1.5;
+  color: #212529;
+  text-align: center;
+  text-decoration: none;
+  vertical-align: middle;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+  background-color: transparent;
+  border: 1px solid transparent;
+  padding: 4px 8px;
+  font-size: 10px;
+  border-radius: 6px 0 0 6px;
+  color: #fff;
+  background-color: #cc9933;
+  border-color: #cc9933;
+  z-index: 5;
+`
+
+const Input = styled.input`
+  padding: 4px 8px;
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 1.5;
+  margin-left: -1px;
+  color: #212529;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border-radius: 0 6px 6px 0;
+`
+
+const Row = styled.div`
+  display: flex;
 `

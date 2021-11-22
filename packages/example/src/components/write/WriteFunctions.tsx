@@ -2,14 +2,13 @@ import React from 'react'
 import styled from 'styled-components'
 import { WriteClick } from './WriteClick'
 import Data from '../../scaffold/contractScaffold.json'
-const fileContent = Data.write
 
+const fileContent = Data.write
 
 type Input = {
   name: string
   type: string
 }
-
 
 type SingleContractObject = {
   constant: boolean
@@ -73,24 +72,4 @@ const List = styled.ul`
   display: flex;
   flex-direction: column;
   width: 100%;
-`
-
-const TokenItem = styled.li`
-  display: grid;
-  grid-template-areas:
-    'icon name balance'
-    'icon ticker balance';
-  grid-template-columns: auto 1fr auto;
-  grid-template-rows: auto auto;
-  grid-column-gap: 20px;
-  grid-row-gap: 8px;
-  align-items: center;
-  height: 84px;
-  padding: 12px 0;
-  border-top: 1px solid transparent;
-  border-bottom: 1px solid transparent;
-
-  & + & {
-    border-top: 1px solid ${Colors.Black[200]};
-  }
 `

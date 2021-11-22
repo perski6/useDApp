@@ -25,10 +25,10 @@ function leaveOnlyFunctions(jsonObject, contractAddress) {
         if (obj.type === 'function') {
             obj.constractAddress = contractAddress;
             if (obj.stateMutability === 'view') {
-                resultWrite.push(obj);
+                resultRead.push(obj);
             }
             else {
-                resultRead.push(obj);
+                resultWrite.push(obj);
             }
         }
     }
@@ -42,12 +42,13 @@ function createInterface(contractAddress) {
         const response = yield axios_1.default.get(`https://api.etherscan.io/api?module=contract&action=getabi&address=${contractAddress}`);
         const data = response.data;
         const contractABI = JSON.parse(data.result);
+        const MyContract = new web3.eth.Contract(contractABI);
         if (contractABI) {
             const filteredContractAbi = leaveOnlyFunctions(contractABI, contractAddress);
             const response = {
                 address: contractAddress,
-                read: filteredContractAbi.resultRead,
                 write: filteredContractAbi.resultWrite,
+                read: filteredContractAbi.resultRead,
                 abi: contractABI,
             };
             fs_1.default.writeFile(`../example/src/scaffold/contractScaffold.json`, JSON.stringify(response), 'utf8', (err) => {
